@@ -120,14 +120,14 @@
 
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
+import { namespace } from "vuex-class";
 
-@Options({
-  props: {
-    msg: String,
-  },
-})
+const distribution = namespace("distribution");
+
+@Options({})
 export default class HelloWorld extends Vue {
-  msg!: string;
+  @distribution.State
+  public msg!: string;
 }
 </script>
 
