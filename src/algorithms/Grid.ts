@@ -3,12 +3,34 @@ import Square from "./Square";
 export default class Grid {
   squares: Square[][];
 
-  constructor(input: string[][]) {
-    this.squares = input.map((row) => {
-      return row.map((value) => {
-        return new Square(value === "1");
-      });
-    });
+  constructor(inputGrid: string[][]) {
+    this.squares = [];
+    for (let y = 0; y < inputGrid.length; y++) {
+      const row = [];
+      for (let x = 0; x < inputGrid[y].length; x++) {
+        row.push(
+          new Square({
+            isWall: inputGrid[y][x] === "1",
+            grid: this,
+            x,
+            y,
+          })
+        );
+      }
+      this.squares.push(row);
+    }
+  }
+
+  getSquareAt(x: number, y: number): Square | null {
+    if (
+      x >= this.squares[0].length ||
+      x < 0 ||
+      y >= this.squares.length ||
+      y < 0
+    ) {
+      return null;
+    }
+    return this.squares[y][x];
   }
 
   static toStringGrid(squares: Square[][]): string[][] {

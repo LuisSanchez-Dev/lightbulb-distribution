@@ -13,6 +13,16 @@ export default class LRTD extends BaseAlgorithm {
 
   run(): string[][] {
     const grid = new Grid(this.input);
+    const firstSquare = grid.getSquareAt(1, 1);
+    if (firstSquare) {
+      console.log({
+        above: firstSquare?.above(),
+        left: firstSquare.left(),
+        center: firstSquare,
+        right: firstSquare.right(),
+        below: firstSquare?.below(),
+      });
+    }
     const { squares } = grid;
 
     for (let i = 0; i < squares.length; i++) {
