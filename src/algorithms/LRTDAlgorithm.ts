@@ -6,6 +6,7 @@ export default class LRTD extends BaseAlgorithm {
   description =
     "Left-Right Top-Down algorithm, it goes from the upper left corner to the lower right corner, placing lightbulbs every time there is no light in that position";
   declare input: string[][];
+  declare lightbulbsUsed: number;
 
   constructor(input: string[][]) {
     super(input);
@@ -20,6 +21,7 @@ export default class LRTD extends BaseAlgorithm {
 
         if (!square.isWall && !square.isIlluminated) {
           square.isLightbulb = square.isIlluminated = true;
+          this.lightbulbsUsed++;
           let squareToRight = square.right();
           while (squareToRight && !squareToRight.isWall) {
             squareToRight.isIlluminated = true;
