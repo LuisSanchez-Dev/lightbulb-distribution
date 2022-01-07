@@ -1,15 +1,21 @@
 import { VuexModule, Module, Mutation, Action } from "vuex-module-decorators";
+import { LRTDAlgorithm } from "../../algorithms";
 
-@Module({ namespaced: true, name: "distribution" })
+@Module({
+  namespaced: true,
+})
 class Distribution extends VuexModule {
   public msg = "Message from state";
+  public output: string[][] = [["0", "0"]];
+
   @Mutation
-  public setMsg(newMsg: string): void {
-    this.msg = newMsg;
+  public setOutput(output: string[][]): void {
+    this.output = output;
   }
   @Action
-  public updateMsg(newMsg: string): void {
-    this.context.commit("setMsg", newMsg);
+  public updateInput(input: string): void {
+    const lrtd = new LRTDAlgorithm([["0", "1"]]);
+    this.context.commit("setOutput", lrtd.run());
   }
 }
 export default Distribution;
