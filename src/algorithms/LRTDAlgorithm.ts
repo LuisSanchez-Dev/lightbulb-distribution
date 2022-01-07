@@ -1,29 +1,5 @@
 import BaseAlgorithm from "./BaseAlgorithm";
-
-class Square {
-  isWall = false;
-  isIlluminated = false;
-  isLightbulb = false;
-  constructor(isWall: boolean) {
-    this.isWall = isWall;
-  }
-
-  static toStringArrays(squares: Square[][]): string[][] {
-    return squares.map((row) => {
-      return row.map((square) => {
-        if (square.isWall) {
-          return "1";
-        } else if (square.isIlluminated && !square.isLightbulb) {
-          return "0";
-        } else if (square.isLightbulb) {
-          return "L";
-        } else {
-          return "-";
-        }
-      });
-    });
-  }
-}
+import Grid from "./Grid";
 
 export default class LRTD extends BaseAlgorithm {
   name = "LRTD";
@@ -36,12 +12,9 @@ export default class LRTD extends BaseAlgorithm {
   }
 
   run(): string[][] {
-    const squares = this.input.map((row) => {
-      return row.map((value) => {
-        return new Square(value === "1");
-      });
-    });
-    console.log(squares);
+    const grid = new Grid(this.input);
+    const { squares } = grid;
+
     for (let i = 0; i < squares.length; i++) {
       const row = squares[i];
       for (let j = 0; j < row.length; j++) {
@@ -50,7 +23,7 @@ export default class LRTD extends BaseAlgorithm {
           square.isLightbulb = square.isIlluminated = true;
           let offsetX = 1;
           if (j + offsetX < row.length) {
-            let nextSquare: Square = row[j + offsetX];
+            let nextSquare = row[j + offsetX];
             while (!nextSquare.isWall) {
               nextSquare.isIlluminated = true;
               offsetX++;
@@ -62,7 +35,7 @@ export default class LRTD extends BaseAlgorithm {
           }
           let offsetY = 1;
           if (i + offsetY < squares.length) {
-            let nextSquare: Square = squares[i + offsetY][j];
+            let nextSquare = squares[i + offsetY][j];
             console.log({ i, j });
             while (nextSquare != undefined && !nextSquare.isWall) {
               console.log("Starting column loop");
@@ -85,6 +58,6 @@ export default class LRTD extends BaseAlgorithm {
       }
     }
     console.log("Converting to strings");
-    return Square.toStringArrays(squares);
+    return Grid.toStringGrid(squares);
   }
 }
