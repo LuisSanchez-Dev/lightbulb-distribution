@@ -1,15 +1,33 @@
 import { VuexModule, Module, Mutation, Action } from "vuex-module-decorators";
+import Algorithms from "@/algorithms";
+import IAlgorithm from "@/algorithms/IAlgorithm";
 
-@Module({ namespaced: true, name: "distribution" })
+@Module({
+  namespaced: true,
+})
 class Distribution extends VuexModule {
-  public msg = "Message from state";
+  public algorithms: IAlgorithm[] = [];
+
   @Mutation
-  public setMsg(newMsg: string): void {
-    this.msg = newMsg;
+  public setAlgorithms(algorithms: IAlgorithm[]): void {
+    this.algorithms = algorithms;
   }
-  @Action
-  public updateMsg(newMsg: string): void {
-    this.context.commit("setMsg", newMsg);
+
+  @Action({ rawError: true })
+  public updateInput(input: string): void {
+    const customInput = [
+      ["0", "0", "0", "0", "0"],
+      ["0", "0", "0", "1", "0"],
+      ["0", "0", "0", "1", "0"],
+      ["0", "0", "0", "1", "0"],
+      ["0", "0", "0", "0", "0"],
+    ];
+    const algorithms = Algorithms.map((AlgorithmClass) => {
+      const algorithm = new AlgorithmClass(customInput);
+      algorithm.run();
+      return algorithm;
+    });
+    this.context.commit("setAlgorithms", algorithms);
   }
 }
 export default Distribution;

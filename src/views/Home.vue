@@ -1,17 +1,20 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld />
+    <h1>💡 Lightbulb Distribution</h1>
+    <InputTextBox />
+    <OutputGrid />
   </div>
 </template>
 
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
-import HelloWorld from "@/components/HelloWorld.vue"; // @ is an alias to /src
+import InputTextBox from "@/components/InputTextBox.vue"; // @ is an alias to /src
+import OutputGrid from "@/components/OutputGrid.vue";
 
 @Options({
   components: {
-    HelloWorld,
+    InputTextBox,
+    OutputGrid,
   },
 })
 export default class Home extends Vue {}
