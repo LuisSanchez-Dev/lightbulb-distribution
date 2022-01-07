@@ -12,9 +12,15 @@ class Distribution extends VuexModule {
   public setOutput(output: string[][]): void {
     this.output = output;
   }
-  @Action
+  @Action({ rawError: true })
   public updateInput(input: string): void {
-    const lrtd = new LRTDAlgorithm([["0", "1"]]);
+    const lrtd = new LRTDAlgorithm([
+      ["0", "0", "1", "0", "0"],
+      ["0", "0", "1", "0", "0"],
+      ["1", "1", "1", "1", "1"],
+      ["0", "0", "1", "0", "0"],
+      ["0", "0", "1", "0", "0"],
+    ]);
     this.context.commit("setOutput", lrtd.run());
   }
 }
