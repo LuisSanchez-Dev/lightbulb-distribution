@@ -9,10 +9,13 @@
       v-model="value"
     ></textarea>
     <br />
+    <div class="error-message" v-if="errorMessage.length > 0">
+      {{ errorMessage }}
+    </div>
     <div>
       ...you also can
       <a @click="generateRandomInput">generate a random input</a> or
-      <a href="#">choose a txt file</a>
+      <a @click="openFile">choose a txt file</a>
       from your computer
     </div>
     <button @click="distributeLightbulbs">DISTRIBUTE LIGHTBULBS</button>
@@ -27,12 +30,35 @@ const distribution = namespace("distribution");
 
 export default class InputTextBox extends Vue {
   value = "";
+  errorMessage = "";
 
   @distribution.Action
-  public updateInput!: (input: string) => void;
+  public updateInput!: (input: string[][]) => void;
 
   distributeLightbulbs(): void {
-    this.updateInput(this.value);
+    if (this.isInputValid(this.value)) {
+      const parsedInput = this.value.split("\n").map((row) => row.split(""));
+      this.updateInput(parsedInput);
+    }
+  }
+
+  isInputValid(input: string): boolean {
+    const unexpectedCharacters = input.replace(/[01\n]/g, "");
+    if (unexpectedCharacters.length > 0) {
+      const notRepeatedChars = [...new Set(unexpectedCharacters)].join("");
+      this.errorMessage = `Unexpected characters: ${notRepeatedChars}`;
+      return false;
+    }
+
+    const rows = input.split("\n");
+    for (let i = 0; i < rows.length; i++) {
+      if (rows[i].length !== rows[0].length) {
+        this.errorMessage = `Size missmatch at line ${i + 1}`;
+        return false;
+      }
+    }
+    this.errorMessage = "";
+    return true;
   }
 
   generateRandomInput(): void {
@@ -46,6 +72,31 @@ export default class InputTextBox extends Vue {
       output += "\n";
     }
     this.value = output;
+  }
+
+  openFile(): void {
+    const input = document.createElement("input");
+    input.type = "file";
+    input.accept = ".txt";
+    input.onchange = () => {
+      if (input.files && input.files.length >= 1) {
+        const fileType = input.files[0].type || "";
+        if (!(fileType === "text/plain" || fileType === "")) {
+          this.errorMessage = `File of type "${fileType}" are not supported`;
+          return;
+        }
+      }
+
+      const fr = new FileReader();
+      fr.onload = (e) => {
+        this.errorMessage = "";
+        this.value = `${fr.result}`.replaceAll(/\r/g, "");
+      };
+      if (input.files) {
+        fr.readAsText(input.files[0]);
+      }
+    };
+    input.click();
   }
 }
 </script>
@@ -64,6 +115,7 @@ export default class InputTextBox extends Vue {
   letter-spacing: 12px;
   line-height: 30px;
   text-align: center;
+  width: 500px;
 }
 button {
   margin-top: 20px;
@@ -80,5 +132,14 @@ button:hover {
 a {
   margin-left: 3px;
   margin-right: 3px;
+}
+
+.error-message {
+  background: #a00000;
+  border: 5px solid #b00;
+  padding: 3px 8px;
+  margin-bottom: 15px;
+  width: 500px;
+  margin: auto;
 }
 </style>
