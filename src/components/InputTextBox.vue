@@ -10,7 +10,8 @@
     ></textarea>
     <br />
     <div>
-      ...you also can <a href="#">generate a random input</a> or
+      ...you also can
+      <a @click="generateRandomInput">generate a random input</a> or
       <a href="#">choose a txt file</a>
       from your computer
     </div>
@@ -32,6 +33,19 @@ export default class InputTextBox extends Vue {
 
   distributeLightbulbs(): void {
     this.updateInput(this.value);
+  }
+
+  generateRandomInput(): void {
+    const width = 3 + Math.ceil(Math.random() * 14);
+    const height = 3 + Math.ceil(Math.random() * 7);
+    let output = "";
+    for (let y = 0; y < height; y++) {
+      for (let x = 0; x < width; x++) {
+        output += Math.random() >= 0.75 ? "1" : "0";
+      }
+      output += "\n";
+    }
+    this.value = output;
   }
 }
 </script>

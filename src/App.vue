@@ -27,5 +27,6 @@ body {
 a {
   color: #62d9a3;
   font-weight: bolder;
+  cursor: pointer;
 }
 </style>

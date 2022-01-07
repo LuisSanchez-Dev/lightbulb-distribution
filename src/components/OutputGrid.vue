@@ -5,29 +5,23 @@
     :key="algorithm.name"
   >
     <h3>{{ algorithm.name }} algorithm</h3>
-    <div class="row">
-      <div class="column left">
-        <table class="output-grid">
-          <tr v-for="row in algorithm.output" :key="row">
-            <td :class="getClass(value)" v-for="value in row" :key="value">
-              <img
-                v-if="value === 'L'"
-                src="../assets/lightbulb.png"
-                alt="lightbulb"
-              />
-              <!-- {{ value }} -->
-            </td>
-          </tr>
-        </table>
-      </div>
-      <div class="column right">
-        <p class="lightbulbs-count-container">
-          <span class="lightbulbs-count">{{ algorithm.lightbulbsUsed }}</span>
-          lightbulbs used
-        </p>
-        <p>{{ algorithm.description }}</p>
-      </div>
-    </div>
+    <p class="lightbulbs-count-container">
+      <span class="lightbulbs-count">{{ algorithm.lightbulbsUsed }}</span>
+      lightbulbs used
+    </p>
+    <table class="output-grid">
+      <tr v-for="row in algorithm.output" :key="row">
+        <td :class="getClass(value)" v-for="value in row" :key="value">
+          <img
+            v-if="value === 'L'"
+            src="../assets/lightbulb.png"
+            alt="lightbulb"
+          />
+          <!-- {{ value }} -->
+        </td>
+      </tr>
+    </table>
+    <p>{{ algorithm.description }}</p>
   </div>
 </template>
 
@@ -71,27 +65,14 @@ export default class OutputGrid extends Vue {
   line-height: 30px;
   text-align: center;
 }
-.column {
-  float: left;
-}
-.left {
-  width: 35%;
-}
 .right {
-  position: relative;
-  width: 65%;
   font-family: sans-serif;
   font-size: 20px;
   font-weight: lighter;
 }
 
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
-}
 .lightbulbs-count-container {
-  text-align: left;
+  background: #505030;
 }
 
 .lightbulbs-count {
@@ -103,7 +84,7 @@ export default class OutputGrid extends Vue {
 td {
   width: 30px;
   height: 30px;
-  outline: 1px solid black;
+  border: 3px solid black;
 }
 td img {
   width: 32px;
