@@ -5,20 +5,23 @@
     :key="algorithm.name"
   >
     <h3>{{ algorithm.name }} algorithm</h3>
-    <div class="row">
-      <div class="column left">
-        <table class="output-grid">
-          <tr v-for="row in algorithm.output" :key="row">
-            <td v-for="value in row" :key="value">
-              {{ value }}
-            </td>
-          </tr>
-        </table>
-      </div>
-      <div class="column right">
-        {{ algorithm.description }}
-      </div>
-    </div>
+    <p class="lightbulbs-count-container">
+      <span class="lightbulbs-count">{{ algorithm.lightbulbsUsed }}</span>
+      lightbulbs used
+    </p>
+    <table class="output-grid">
+      <tr v-for="row in algorithm.output" :key="row">
+        <td :class="getClass(value)" v-for="value in row" :key="value">
+          <img
+            v-if="value === 'L'"
+            src="../assets/lightbulb.png"
+            alt="lightbulb"
+          />
+          <!-- {{ value }} -->
+        </td>
+      </tr>
+    </table>
+    <p>{{ algorithm.description }}</p>
   </div>
 </template>
 
@@ -32,13 +35,21 @@ const distribution = namespace("distribution");
 export default class OutputGrid extends Vue {
   @distribution.State
   public algorithms!: IAlgorithm[][];
+
+  getClass(squareType: string): string {
+    if (squareType === "1") {
+      return "wall";
+    }
+    return "floor";
+  }
 }
 </script>
 
 <style scoped lang="scss">
 .output-grid-container {
-  outline: 1px solid green;
-  background: #142014;
+  outline: 1px solid yellow;
+  border-radius: 1px;
+  background: #404030;
   padding: 15px 45px;
   color: #fff;
   margin: auto;
@@ -54,24 +65,36 @@ export default class OutputGrid extends Vue {
   line-height: 30px;
   text-align: center;
 }
-.column {
-  float: left;
-}
-.left {
-  width: 35%;
-}
 .right {
-  position: relative;
-  padding-top: 50px;
-  width: 65%;
   font-family: sans-serif;
   font-size: 20px;
   font-weight: lighter;
 }
 
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
+.lightbulbs-count-container {
+  background: #505030;
+}
+
+.lightbulbs-count {
+  font-size: 60px;
+  font-weight: bolder;
+  margin-right: 5px;
+}
+
+td {
+  width: 30px;
+  height: 30px;
+  border: 3px solid black;
+}
+td img {
+  width: 32px;
+  height: 32px;
+}
+.floor {
+  background-image: url("../assets/floor.png");
+}
+
+.wall {
+  background: #111;
 }
 </style>
