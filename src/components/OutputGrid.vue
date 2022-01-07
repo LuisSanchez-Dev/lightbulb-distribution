@@ -9,14 +9,23 @@
       <div class="column left">
         <table class="output-grid">
           <tr v-for="row in algorithm.output" :key="row">
-            <td v-for="value in row" :key="value">
-              {{ value }}
+            <td :class="getClass(value)" v-for="value in row" :key="value">
+              <img
+                v-if="value === 'L'"
+                src="../assets/lightbulb.png"
+                alt="lightbulb"
+              />
+              <!-- {{ value }} -->
             </td>
           </tr>
         </table>
       </div>
       <div class="column right">
-        {{ algorithm.description }}
+        <p class="lightbulbs-count-container">
+          <span class="lightbulbs-count">{{ algorithm.lightbulbsUsed }}</span>
+          lightbulbs used
+        </p>
+        <p>{{ algorithm.description }}</p>
       </div>
     </div>
   </div>
@@ -32,13 +41,21 @@ const distribution = namespace("distribution");
 export default class OutputGrid extends Vue {
   @distribution.State
   public algorithms!: IAlgorithm[][];
+
+  getClass(squareType: string): string {
+    if (squareType === "1") {
+      return "wall";
+    }
+    return "floor";
+  }
 }
 </script>
 
 <style scoped lang="scss">
 .output-grid-container {
-  outline: 1px solid green;
-  background: #142014;
+  outline: 1px solid yellow;
+  border-radius: 1px;
+  background: #404030;
   padding: 15px 45px;
   color: #fff;
   margin: auto;
@@ -62,7 +79,6 @@ export default class OutputGrid extends Vue {
 }
 .right {
   position: relative;
-  padding-top: 50px;
   width: 65%;
   font-family: sans-serif;
   font-size: 20px;
@@ -73,5 +89,31 @@ export default class OutputGrid extends Vue {
   content: "";
   display: table;
   clear: both;
+}
+.lightbulbs-count-container {
+  text-align: left;
+}
+
+.lightbulbs-count {
+  font-size: 60px;
+  font-weight: bolder;
+  margin-right: 5px;
+}
+
+td {
+  width: 30px;
+  height: 30px;
+  outline: 1px solid black;
+}
+td img {
+  width: 32px;
+  height: 32px;
+}
+.floor {
+  background-image: url("../assets/floor.png");
+}
+
+.wall {
+  background: #111;
 }
 </style>

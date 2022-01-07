@@ -15,15 +15,17 @@
 }
 
 #nav {
-  padding: 30px;
+  display: none;
+}
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+html,
+body {
+  background: linear-gradient(45deg, #242424, #484848);
+  padding-bottom: 50px;
+  color: #fff;
+}
+a {
+  color: #62d9a3;
+  font-weight: bolder;
 }
 </style>
