@@ -13,16 +13,7 @@ export default class LRTD extends BaseAlgorithm {
 
   run(): string[][] {
     const grid = new Grid(this.input);
-    const firstSquare = grid.getSquareAt(1, 1);
-    if (firstSquare) {
-      console.log({
-        above: firstSquare?.above(),
-        left: firstSquare.left(),
-        center: firstSquare,
-        right: firstSquare.right(),
-        below: firstSquare?.below(),
-      });
-    }
+
     const { squares } = grid;
 
     for (let i = 0; i < squares.length; i++) {
@@ -46,28 +37,19 @@ export default class LRTD extends BaseAlgorithm {
           let offsetY = 1;
           if (i + offsetY < squares.length) {
             let nextSquare = squares[i + offsetY][j];
-            console.log({ i, j });
             while (nextSquare != undefined && !nextSquare.isWall) {
-              console.log("Starting column loop");
-              console.log({ i: i + offsetY, j, nextSquare });
               nextSquare.isIlluminated = true;
               offsetY++;
-              console.log("Before error");
               if (i + offsetY >= squares.length) {
-                console.log("After error");
                 break;
               }
               nextSquare = squares[i + offsetY][j];
-              console.log({ i: i + offsetY, j, nextSquare });
-              console.log("Ended column loop");
             }
           }
-
-          console.log("Ended all collumn");
         }
       }
     }
-    console.log("Converting to strings");
+
     return Grid.toStringGrid(squares);
   }
 }

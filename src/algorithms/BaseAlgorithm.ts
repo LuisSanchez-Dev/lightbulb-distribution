@@ -7,7 +7,6 @@ export default class BaseAlgorithm implements IAlgorithm {
   lightbulbsUsed = 0;
   input: string[][];
   run(): string[][] {
-    console.log("Base algorithm input:", this.input);
     return [
       ["L", "0", "0", "0"],
       ["0", "L", "0", "0"],

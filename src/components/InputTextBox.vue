@@ -30,8 +30,6 @@ export default class HelloWorld extends Vue {
   public updateInput!: (input: string) => void;
 
   distributeLightbulbs(): void {
-    console.log("clicked button");
-    console.log(this.value);
     this.updateInput(this.value);
   }
 }
