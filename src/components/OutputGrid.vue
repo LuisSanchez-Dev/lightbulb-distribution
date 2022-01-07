@@ -49,7 +49,7 @@ export default class OutputGrid extends Vue {
 .output-grid-container {
   outline: 1px solid yellow;
   border-radius: 1px;
-  background: #404030;
+  background: #121212;
   padding: 15px 45px;
   color: #fff;
   margin: auto;
@@ -72,7 +72,8 @@ export default class OutputGrid extends Vue {
 }
 
 .lightbulbs-count-container {
-  background: #505030;
+  border-bottom: 2px solid #aaa;
+  margin-bottom: 10px;
 }
 
 .lightbulbs-count {
@@ -84,7 +85,7 @@ export default class OutputGrid extends Vue {
 td {
   width: 30px;
   height: 30px;
-  border: 3px solid black;
+  border: 2px solid #242424;
 }
 td img {
   width: 32px;
