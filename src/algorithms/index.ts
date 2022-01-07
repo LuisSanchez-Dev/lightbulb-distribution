@@ -1,4 +1,5 @@
 import LRTDAlgorithm from "./LRTDAlgorithm";
-import RLBUAlgorithm from "./RLBU";
+import RLBUAlgorithm from "./RLBUAlgorithmU";
 
+export default [LRTDAlgorithm, RLBUAlgorithm];
 export { LRTDAlgorithm, RLBUAlgorithm };

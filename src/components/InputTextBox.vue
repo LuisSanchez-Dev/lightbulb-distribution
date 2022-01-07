@@ -1,5 +1,5 @@
 <template>
-  <div class="hello">
+  <div>
     <textarea
       class="matrix-input"
       id=""
@@ -10,7 +10,6 @@
     ></textarea>
     <br />
     <button @click="distributeLightbulbs">DISTRIBUTE LIGHTBULBS</button>
-    <h1>{{ msg }}</h1>
   </div>
 </template>
 
@@ -20,11 +19,8 @@ import { namespace } from "vuex-class";
 
 const distribution = namespace("distribution");
 
-@Options({})
 export default class HelloWorld extends Vue {
   value = "";
-  @distribution.State
-  public msg!: string;
 
   @distribution.Action
   public updateInput!: (input: string) => void;
@@ -58,19 +54,5 @@ button {
 }
 button:hover {
   background: #909000;
-}
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
 }
 </style>

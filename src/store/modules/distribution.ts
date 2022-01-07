@@ -1,27 +1,33 @@
 import { VuexModule, Module, Mutation, Action } from "vuex-module-decorators";
-import { RLBUAlgorithm } from "../../algorithms";
+import Algorithms from "@/algorithms";
+import IAlgorithm from "@/algorithms/IAlgorithm";
 
 @Module({
   namespaced: true,
 })
 class Distribution extends VuexModule {
-  public msg = "Message from state";
-  public output: string[][] = [["0", "0"]];
+  public algorithms: IAlgorithm[] = [];
 
   @Mutation
-  public setOutput(output: string[][]): void {
-    this.output = output;
+  public setAlgorithms(algorithms: IAlgorithm[]): void {
+    this.algorithms = algorithms;
   }
+
   @Action({ rawError: true })
   public updateInput(input: string): void {
-    const lrtd = new RLBUAlgorithm([
+    const customInput = [
       ["0", "0", "0", "0", "0"],
       ["0", "0", "0", "1", "0"],
       ["0", "0", "0", "1", "0"],
       ["0", "0", "0", "1", "0"],
       ["0", "0", "0", "0", "0"],
-    ]);
-    this.context.commit("setOutput", lrtd.run());
+    ];
+    const algorithms = Algorithms.map((AlgorithmClass) => {
+      const algorithm = new AlgorithmClass(customInput);
+      algorithm.run();
+      return algorithm;
+    });
+    this.context.commit("setAlgorithms", algorithms);
   }
 }
 export default Distribution;

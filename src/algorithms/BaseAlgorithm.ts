@@ -6,13 +6,15 @@ export default class BaseAlgorithm implements IAlgorithm {
     "This is the base algorithm, make sure to extend this class and assign a value to this.lightbulbs";
   lightbulbsUsed = 0;
   input: string[][];
+  output: string[][] = [[]];
   run(): string[][] {
-    return [
+    this.output = [
       ["L", "0", "0", "0"],
       ["0", "L", "0", "0"],
       ["0", "0", "L", "0"],
       ["0", "0", "0", "L"],
     ];
+    return this.output;
   }
 
   constructor(input: string[][]) {

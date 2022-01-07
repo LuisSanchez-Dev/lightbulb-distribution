@@ -1,67 +1,77 @@
 <template>
-  <div class="output-grid-container">
-    <table class="output-grid">
-      <tr v-for="row in output" :key="row">
-        <td v-for="value in row" :key="value">
-          {{ value }}
-        </td>
-      </tr>
-    </table>
+  <div
+    class="output-grid-container"
+    v-for="algorithm in algorithms"
+    :key="algorithm.name"
+  >
+    <h3>{{ algorithm.name }} algorithm</h3>
+    <div class="row">
+      <div class="column left">
+        <table class="output-grid">
+          <tr v-for="row in algorithm.output" :key="row">
+            <td v-for="value in row" :key="value">
+              {{ value }}
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="column right">
+        {{ algorithm.description }}
+      </div>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
 import { namespace } from "vuex-class";
+import IAlgorithm from "@/algorithms/IAlgorithm";
 
 const distribution = namespace("distribution");
 
-export default class HelloWorld extends Vue {
+export default class OutputGrid extends Vue {
   @distribution.State
-  public output!: string[][];
+  public algorithms!: IAlgorithm[][];
 }
 </script>
 
 <style scoped lang="scss">
 .output-grid-container {
   outline: 1px solid green;
-  background: #243024;
-  padding: 15px 19px;
+  background: #142014;
+  padding: 15px 45px;
   color: #fff;
+  margin: auto;
+  margin-bottom: 20px;
+  width: 60%;
+  max-width: 100%;
+}
+.output-grid {
+  margin: auto;
   font-family: consolas;
   font-size: 24px;
   letter-spacing: 12px;
   line-height: 30px;
-  text-align: ceil($number: 0);
-  margin: auto;
-  margin-bottom: 100px;
+  text-align: center;
 }
-.output-grid {
-  margin: auto;
+.column {
+  float: left;
 }
-button {
-  margin-top: 20px;
-  padding: 10px 25px;
-  border-radius: 2px;
-  background: #606000;
-  font-size: 30px;
-  color: #fff;
+.left {
+  width: 35%;
 }
-button:hover {
-  background: #909000;
+.right {
+  position: relative;
+  padding-top: 50px;
+  width: 65%;
+  font-family: sans-serif;
+  font-size: 20px;
+  font-weight: lighter;
 }
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
 }
 </style>

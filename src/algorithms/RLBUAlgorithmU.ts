@@ -1,12 +1,13 @@
 import BaseAlgorithm from "./BaseAlgorithm";
 import Grid from "./Grid";
 
-export default class RLBU extends BaseAlgorithm {
+export default class RLBUAlgorithmU extends BaseAlgorithm {
   name = "RLBU";
   description =
     "Right-LEFT Bottom-Up algorithm, it goes from the lower right corner to the upper left corner, placing lightbulbs every time there is no light in that position";
   declare input: string[][];
   declare lightbulbsUsed: number;
+  declare output: string[][];
 
   constructor(input: string[][]) {
     super(input);
@@ -36,7 +37,7 @@ export default class RLBU extends BaseAlgorithm {
         }
       }
     }
-
-    return Grid.toStringGrid(grid.squares);
+    this.output = Grid.toStringGrid(grid.squares);
+    return this.output;
   }
 }

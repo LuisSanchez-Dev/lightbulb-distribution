@@ -7,6 +7,7 @@ export default class LRTD extends BaseAlgorithm {
     "Left-Right Top-Down algorithm, it goes from the upper left corner to the lower right corner, placing lightbulbs every time there is no light in that position";
   declare input: string[][];
   declare lightbulbsUsed: number;
+  declare output: string[][];
 
   constructor(input: string[][]) {
     super(input);
@@ -36,7 +37,7 @@ export default class LRTD extends BaseAlgorithm {
         }
       }
     }
-
-    return Grid.toStringGrid(grid.squares);
+    this.output = Grid.toStringGrid(grid.squares);
+    return this.output;
   }
 }

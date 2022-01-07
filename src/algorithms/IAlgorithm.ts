@@ -3,5 +3,6 @@ export default interface IAlgorithm {
   description: string;
   input: string[][];
   lightbulbsUsed: number;
+  output: string[][];
   run: () => string[][];
 }
