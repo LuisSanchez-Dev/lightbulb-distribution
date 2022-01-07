@@ -21,6 +21,18 @@ export default class Grid {
     }
   }
 
+  public get width(): number {
+    return this.squares[0].length;
+  }
+
+  public get height(): number {
+    return this.squares.length;
+  }
+
+  getOriginSquare(): Square {
+    return this.squares[0][0];
+  }
+
   getSquareAt(x: number, y: number): Square | null {
     if (
       x >= this.squares[0].length ||

@@ -13,43 +13,28 @@ export default class LRTD extends BaseAlgorithm {
 
   run(): string[][] {
     const grid = new Grid(this.input);
+    for (let x = 0; x < grid.width; x++) {
+      for (let y = 0; y < grid.height; y++) {
+        const square = grid.getSquareAt(x, y);
+        if (!square) continue;
 
-    const { squares } = grid;
-
-    for (let i = 0; i < squares.length; i++) {
-      const row = squares[i];
-      for (let j = 0; j < row.length; j++) {
-        const square = row[j];
         if (!square.isWall && !square.isIlluminated) {
           square.isLightbulb = square.isIlluminated = true;
-          let offsetX = 1;
-          if (j + offsetX < row.length) {
-            let nextSquare = row[j + offsetX];
-            while (!nextSquare.isWall) {
-              nextSquare.isIlluminated = true;
-              offsetX++;
-              if (j + offsetX >= row.length) {
-                break;
-              }
-              nextSquare = row[j + offsetX];
-            }
+          let squareToRight = square.right();
+          while (squareToRight && !squareToRight.isWall) {
+            squareToRight.isIlluminated = true;
+            squareToRight = squareToRight.right();
           }
-          let offsetY = 1;
-          if (i + offsetY < squares.length) {
-            let nextSquare = squares[i + offsetY][j];
-            while (nextSquare != undefined && !nextSquare.isWall) {
-              nextSquare.isIlluminated = true;
-              offsetY++;
-              if (i + offsetY >= squares.length) {
-                break;
-              }
-              nextSquare = squares[i + offsetY][j];
-            }
+
+          let squareBelow = square.below();
+          while (squareBelow && !squareBelow.isWall) {
+            squareBelow.isIlluminated = true;
+            squareBelow = squareBelow.below();
           }
         }
       }
     }
 
-    return Grid.toStringGrid(squares);
+    return Grid.toStringGrid(grid.squares);
   }
 }
