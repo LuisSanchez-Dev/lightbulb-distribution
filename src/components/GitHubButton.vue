@@ -17,7 +17,7 @@
 
 <style scoped lang="scss">
 .gh-button {
-  position: absolute;
+  position: fixed;
   top: 20px;
   right: 20px;
   border: 4px solid #4078c0;
@@ -50,6 +50,13 @@ img {
 .gh-name {
   font-size: 20px;
   font-weight: bolder;
+}
+
+@media only screen and (max-width: 600px) {
+  .gh-button {
+    top: 0px;
+    right: 4px;
+  }
 }
 </style>
 

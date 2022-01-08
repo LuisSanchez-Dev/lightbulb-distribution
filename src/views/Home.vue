@@ -22,3 +22,11 @@ import OutputGrid from "@/components/OutputGrid.vue";
 })
 export default class Home extends Vue {}
 </script>
+
+<style scoped>
+@media only screen and (max-width: 600px) {
+  .home {
+    margin-top: 100px;
+  }
+}
+</style>

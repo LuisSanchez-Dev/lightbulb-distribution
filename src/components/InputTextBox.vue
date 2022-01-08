@@ -5,7 +5,7 @@
       id=""
       cols="30"
       rows="5"
-      placeholder="Enter your matrix of 0 and 1 here..."
+      placeholder="Enter your matrix of 0s and 1s here..."
       v-model="value"
     ></textarea>
     <br />
@@ -108,6 +108,7 @@ export default class InputTextBox extends Vue {
   outline: 2px solid #aaa;
   background: #484848;
   padding: 15px 19px;
+  margin-bottom: 15px;
   color: #fff;
   font-family: consolas;
   font-size: 24px;
@@ -141,5 +142,21 @@ a {
   margin-bottom: 15px;
   width: 500px;
   margin: auto;
+}
+
+@media only screen and (max-width: 600px) {
+  .matrix-input {
+    width: 50%;
+  }
+  button {
+    margin-left: 30px;
+    margin-right: 30px;
+    font-size: 20px;
+  }
+  a {
+    margin: 20px;
+    font-weight: bolder;
+    font-size: 20px;
+  }
 }
 </style>
