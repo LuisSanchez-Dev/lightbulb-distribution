@@ -23,7 +23,7 @@
         </tr>
       </table>
     </div>
-    <p>{{ algorithm.description }}</p>
+    <p class="algorithm-description">{{ algorithm.description }}</p>
   </div>
 </template>
 
@@ -60,7 +60,7 @@ export default class OutputGrid extends Vue {
   max-width: 100%;
 }
 .output-grid {
-  margin: auto;
+  margin: 0;
   font-family: consolas;
   font-size: 24px;
   letter-spacing: 12px;
@@ -92,8 +92,8 @@ td {
   border: 2px solid #242424;
 }
 td img {
-  width: 32px;
-  height: 32px;
+  width: 30px;
+  height: 30px;
 }
 .floor {
   background-image: url("../assets/floor.png");
@@ -104,11 +104,23 @@ td img {
 }
 
 @media only screen and (max-width: 600px) {
+  .output-grid-container {
+    padding: 5px 0px;
+  }
+
+  .algorithm-description {
+    border-top: 2px solid #aaa;
+    padding-top: 5px;
+  }
   .output-grid-table-container {
     max-width: 100vw;
     overflow-x: auto;
     overflow-y: hidden;
-    padding: auto 60px;
+  }
+  .algorithm-description {
+    margin-left: 10px;
+    margin-right: 10px;
+    text-align: justify;
   }
 }
 </style>
