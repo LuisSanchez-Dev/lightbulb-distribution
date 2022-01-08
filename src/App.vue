@@ -12,6 +12,8 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #fff;
+  width: 100vw;
+  max-width: 100vw;
 }
 
 #nav {
@@ -23,6 +25,8 @@ body {
   background: linear-gradient(45deg, #242424, #484848);
   padding-bottom: 50px;
   color: #fff;
+  width: 100vw;
+  max-width: 100vw;
 }
 a {
   color: #62d9a3;

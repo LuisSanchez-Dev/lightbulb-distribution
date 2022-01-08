@@ -9,24 +9,26 @@
       <span class="lightbulbs-count">{{ algorithm.lightbulbsUsed }}</span>
       lightbulbs used
     </p>
-    <table class="output-grid">
-      <tr v-for="row in algorithm.output" :key="row">
-        <td :class="getClass(value)" v-for="value in row" :key="value">
-          <img
-            v-if="value === 'L'"
-            src="../assets/lightbulb.png"
-            alt="lightbulb"
-          />
-          <!-- {{ value }} -->
-        </td>
-      </tr>
-    </table>
+    <div class="output-grid-table-container">
+      <table class="output-grid">
+        <tr v-for="row in algorithm.output" :key="row">
+          <td :class="getClass(value)" v-for="value in row" :key="value">
+            <img
+              v-if="value === 'L'"
+              src="../assets/lightbulb.png"
+              alt="lightbulb"
+            />
+            <!-- {{ value }} -->
+          </td>
+        </tr>
+      </table>
+    </div>
     <p>{{ algorithm.description }}</p>
   </div>
 </template>
 
 <script lang="ts">
-import { Options, Vue } from "vue-class-component";
+import { Vue } from "vue-class-component";
 import { namespace } from "vuex-class";
 import IAlgorithm from "@/algorithms/IAlgorithm";
 
@@ -99,5 +101,14 @@ td img {
 
 .wall {
   background: #111;
+}
+
+@media only screen and (max-width: 600px) {
+  .output-grid-table-container {
+    max-width: 100vw;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: auto 60px;
+  }
 }
 </style>
