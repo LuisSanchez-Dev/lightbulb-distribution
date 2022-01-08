@@ -15,18 +15,13 @@ class Distribution extends VuexModule {
 
   @Action({ rawError: true })
   public updateInput(input: string[][]): void {
-    // const customInput = [
-    //   ["0", "0", "0", "0", "0"],
-    //   ["0", "0", "0", "1", "0"],
-    //   ["0", "0", "0", "1", "0"],
-    //   ["0", "0", "0", "1", "0"],
-    //   ["0", "0", "0", "0", "0"],
-    // ];
-    // const parsedInput = input.split("\n").map((row) => row.split(""));
-    const algorithms = Algorithms.map((AlgorithmClass) => {
+    let algorithms = Algorithms.map((AlgorithmClass) => {
       const algorithm = new AlgorithmClass(input);
       algorithm.run();
       return algorithm;
+    });
+    algorithms = algorithms.sort((a, b) => {
+      return a.lightbulbsUsed - b.lightbulbsUsed;
     });
     this.context.commit("setAlgorithms", algorithms);
   }

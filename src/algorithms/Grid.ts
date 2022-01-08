@@ -45,6 +45,22 @@ export default class Grid {
     return this.squares[y][x];
   }
 
+  getDarkSquares(): Square[] {
+    const output = [];
+    for (const row of this.squares) {
+      for (const value of row) {
+        if (!value.isWall && !value.isIlluminated) {
+          output.push(value);
+        }
+      }
+    }
+    return output;
+  }
+
+  hasDarkSquares(): boolean {
+    return this.getDarkSquares().length > 0;
+  }
+
   static toStringGrid(squares: Square[][]): string[][] {
     return squares.map((row) => {
       return row.map((square) => {
