@@ -71,7 +71,7 @@ export default class InputTextBox extends Vue {
       }
       output += "\n";
     }
-    this.value = output;
+    this.value = output.slice(0, -1);
   }
 
   openFile(): void {
