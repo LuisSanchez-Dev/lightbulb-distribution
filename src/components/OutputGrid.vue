@@ -85,6 +85,8 @@ export default class OutputGrid extends Vue {
 td {
   width: 30px;
   height: 30px;
+  max-width: 30px;
+  max-height: 30px;
   border: 2px solid #242424;
 }
 td img {
