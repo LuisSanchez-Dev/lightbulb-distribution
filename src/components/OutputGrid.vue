@@ -104,6 +104,11 @@ td img {
   background: #111;
 }
 
+.output-grid-table-container table {
+  margin-left: auto;
+  margin-right: auto;
+}
+
 @media only screen and (max-width: 600px) {
   .output-grid-container {
     padding: 5px 0px;
@@ -121,10 +126,7 @@ td img {
     overflow-x: auto;
     overflow-y: hidden;
   }
-  .output-grid-table-container table {
-    margin-left: auto;
-    margin-right: auto;
-  }
+
   .algorithm-description {
     margin-left: 10px;
     margin-right: 10px;
