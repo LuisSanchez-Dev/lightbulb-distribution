@@ -22,14 +22,18 @@
   display: none;
 }
 
+html {
+  height: 100%;
+}
+
 html,
 body {
   background: linear-gradient(45deg, #242424, #484848);
   padding-bottom: 50px;
+  margin: 0;
   color: #fff;
   width: 100vw;
   max-width: 100vw;
-  position: relative;
   overflow-x: hidden;
 }
 a {

@@ -146,7 +146,7 @@ a {
 
 @media only screen and (max-width: 600px) {
   .matrix-input {
-    width: 50%;
+    width: 50vw;
   }
   button {
     margin-left: 30px;
