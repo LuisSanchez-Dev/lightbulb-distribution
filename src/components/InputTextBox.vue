@@ -13,10 +13,12 @@
       {{ errorMessage }}
     </div>
     <div>
-      ...you also can
-      <a @click="generateRandomInput">generate a random input</a> or
-      <a @click="openFile">choose a txt file</a>
-      from your computer
+      <p class="input-options">
+        ...you also can
+        <a @click="generateRandomInput">generate a random input</a> or
+        <a @click="openFile">choose a txt file</a>
+        from your computer
+      </p>
     </div>
     <button @click="distributeLightbulbs">DISTRIBUTE LIGHTBULBS</button>
   </div>
@@ -146,7 +148,7 @@ a {
 
 @media only screen and (max-width: 600px) {
   .matrix-input {
-    width: 50%;
+    width: 50vw;
   }
   button {
     margin-left: 30px;
@@ -157,6 +159,11 @@ a {
     margin: 20px;
     font-weight: bolder;
     font-size: 20px;
+  }
+
+  .input-options {
+    margin-left: 50px;
+    margin-right: 50px;
   }
 }
 </style>
