@@ -61,6 +61,7 @@ export default class OutputGrid extends Vue {
 }
 .output-grid {
   margin: 0;
+  padding: 0;
   font-family: consolas;
   font-size: 24px;
   letter-spacing: 12px;
@@ -103,9 +104,17 @@ td img {
   background: #111;
 }
 
+.output-grid-table-container table {
+  margin-left: auto;
+  margin-right: auto;
+}
+
 @media only screen and (max-width: 600px) {
   .output-grid-container {
     padding: 5px 0px;
+    margin-left: 0;
+    margin-right: 0;
+    width: 100%;
   }
 
   .algorithm-description {
@@ -117,6 +126,7 @@ td img {
     overflow-x: auto;
     overflow-y: hidden;
   }
+
   .algorithm-description {
     margin-left: 10px;
     margin-right: 10px;

@@ -12,8 +12,10 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #fff;
-  width: 100vw;
-  max-width: 100vw;
+  width: 100%;
+  max-width: 100%;
+  position: relative;
+  overflow-x: hidden;
 }
 
 #nav {
@@ -27,6 +29,8 @@ body {
   color: #fff;
   width: 100vw;
   max-width: 100vw;
+  position: relative;
+  overflow-x: hidden;
 }
 a {
   color: #62d9a3;
